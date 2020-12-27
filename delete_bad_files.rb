@@ -11,9 +11,14 @@ Dir.glob('db/profiles/*.html') do |file|
     bad << Dir.pwd + '/' + file
   end
 end
+
+if bad.empty?
+  puts "No bad files👼"
+  exit
+end
+
 puts "There are #{bad.count} files that are bad😩"
-# p bad
-# puts Dir.pwd
+
 puts "Deleting bad files...🗑 \n"
 bad.each do |file|
   puts "Deleting : #{file}"
