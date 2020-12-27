@@ -118,9 +118,9 @@ def index_friends():
                 'id': info['id'],
                 'name': name,
                 'active': 0 if int(info['is_deactivated']) else 1,
-                'alias': alias                
+                'alias': alias
                 }
-            
+
             utils.db_write(db_index,d)
 
     print('\n>> Saved friends list (%s) to %s' % (num_items,db_index))
@@ -131,6 +131,7 @@ def download_profiles():
     session_downloads = 0
     index = utils.db_read(db_index)
     for i,d in enumerate(index):
+        print('this is d: %s' % d )
         if d['active']:
             fname = profiles_dir + str(d['id']) + '.html'
             if not os.path.exists(fname):
@@ -190,7 +191,7 @@ def parse_profile(profile_file):
                 if len(elements) > 0:
                     d[str(k)] = x(v['href'])[0].get('href')[1:].split('refid')[0][:-1]
             elif 'table' in v:
-                rows = x(v['table']+'td[1])')  
+                rows = x(v['table']+'td[1])')
                 for i in range (1, len(rows)+1):
                     key = x(v['table']+'td[1])'+'['+str(i)+']')[0].text_content()
                     val = x(v['table']+'td[2])'+'['+str(i)+']')[0].text_content()
@@ -251,7 +252,7 @@ def parse_profile_files():
         if not profile_id in already_parsed:
             profile = parse_profile(profile_file)
             utils.db_write(db_profiles,profile)
-    
+
     print('>> %s profiles parsed to %s' % (len(profile_files),db_profiles))
 
 # Create index of friends and their locations
@@ -260,7 +261,7 @@ def index_locations():
     profiles = utils.db_read(db_profiles)
 
     detail_fields = ['Current City','Mobile','Email','Birthday']
-    
+
     for p in profiles:
         details = json.loads(p['details'])
         new_deets = {}
@@ -269,7 +270,7 @@ def index_locations():
                 if k in detail_fields:
                     new_deets[k] = d.get(k,'')
         utils.db_update(db_profiles,p['id'],new_deets)
-    
+
     print('>> Updated friend locations')
 
 # Get coordinates for all locations
@@ -279,11 +280,11 @@ def make_map():
 
     profiles = utils.db_read(db_profiles)
     locations = utils.db_read(db_locations)
-    
+
     geo_dict = {}
     for location in locations:
         geo_dict[location['location']] = location['coordinates']
-    
+
     features = []
     for d in profiles:
         city = d['Current City']
@@ -322,7 +323,7 @@ def make_map():
     with open('friends-map.html', "w", encoding="utf-8") as f:
         f.write(html)
     print('>> Saved map to friends-map.html!')
-    webbrowser.open_new('file://' + os.getcwd() + '/friends-map.html') 
+    webbrowser.open_new('file://' + os.getcwd() + '/friends-map.html')
 
 # Shell application
 if __name__ == '__main__':
