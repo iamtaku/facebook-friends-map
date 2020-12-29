@@ -65,7 +65,7 @@ def sign_in():
     print("Logging in %s automatically..." % fb_user)
     browser.get(fb_start_page)
     email_id = browser.find_element_by_id("m_login_email")
-    pass_id = browser.find_element_by_id("m_login_password")
+    pass_id = browser.find_element_by_name("pass")
     confirm_id = browser.find_element_by_name("login")
     email_id.send_keys(fb_user)
     pass_id.send_keys(fb_pass)
