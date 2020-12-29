@@ -1,7 +1,18 @@
 require 'nokogiri'
+puts "Scanning #{Dir['db/profiles/*'].length} files \n ... \n"
 
-puts 'enter a url to scrape...'
-url = gets.chomp
+Dir.glob('db/profiles/*.html') do |file|
+  # puts "checking ... #{file}"
+  html_file = open(file).read
+  html_doc = Nokogiri::HTML(html_file)
+  # puts html_doc.search('.u.v.w').attribute('placeholder').content[0]
+  # if html_doc.search('.u.v.w').attribute('placeholder').nil? || html_doc.search('.u.v.w').attribute('placeholder').content[0] != 'S'
+  #   bad << Dir.pwd + '/' + file
+  # end
+  puts file
+end
+# puts 'enter a url to scrape...'
+# url = gets.chomp
 # url = 'db/profiles/6859201.html'
 html_file = open(url).read
 html_doc = Nokogiri::HTML(html_file)
@@ -31,4 +42,6 @@ puts year_overviews = root.search('#year-overviews')
 #   puts element
 #   element.css('a').each { |item| puts item.content }
 # end
+
+
 
