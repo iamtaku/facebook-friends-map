@@ -17,7 +17,6 @@ def search_location(root_file)
   }
   html_file = open(root_file).read
   html_doc = Nokogiri::HTML(html_file)
-  # puts html_doc.search('title').text
   root = html_doc.search('.bi.bj')
   root_living = root.search('#living')
   return location unless root_living.any?
@@ -29,19 +28,6 @@ def get_location(root)
   # lived_in = []
   home = {}
   city_table = root.search('td')
-  # city_table[3..].each_with_index do |item, index|
-  #   break if item.text == 'Hometown'
-  #   # check if each <td> has a year attached and attach to place object if attached
-
-  #   next if item.text.chars.first(8).join == 'Moved in'
-
-  #   year = get_year(city_table, index)
-  #   # place[:name] = item.text
-  #   lived_in << {
-  #     name: item.text,
-  #     year: year
-  #   }
-  # end
   lived_in = create_lived_in(city_table)
   home[:name] = city_table.last.text
   {
@@ -54,17 +40,15 @@ end
 
 def create_lived_in(city_table)
   lived_in = []
-   city_table[3..].each_with_index do |item, index|
+  city_table[3..].each_with_index do |item, index|
     break if item.text == 'Hometown'
     # check if each <td> has a year attached and attach to place object if attached
 
     next if item.text.chars.first(8).join == 'Moved in'
 
-    year = get_year(city_table, index)
-    # place[:name] = item.text
     lived_in << {
       name: item.text,
-      year: year
+      year: get_year(city_table, index)
     }
   end
   lived_in
