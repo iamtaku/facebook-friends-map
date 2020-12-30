@@ -38,21 +38,37 @@ def get_location(root)
   # need lived_in
 end
 
+# def create_lived_in(city_table)
+#   lived_in = []
+#   city_table[3..].each_with_index do |item, index|
+#     break if item.text == 'Hometown'
+#     # check if each <td> has a year attached and attach to place object if attached
+
+#     next if item.text.chars.first(8).join == 'Moved in'
+
+#     lived_in << {
+#       name: item.text,
+#       year: get_year(city_table, index)
+#     }
+#   end
+#   lived_in
+# end
 def create_lived_in(city_table)
-  lived_in = []
-  city_table[3..].each_with_index do |item, index|
+  # lived_in = []
+  lived_in = city_table[3..].map.with_index do |item, index|
     break if item.text == 'Hometown'
     # check if each <td> has a year attached and attach to place object if attached
 
     next if item.text.chars.first(8).join == 'Moved in'
 
-    lived_in << {
+    {
       name: item.text,
       year: get_year(city_table, index)
     }
   end
   lived_in
 end
+
 
 def get_year(city_table, index)
   year = nil
