@@ -27,13 +27,13 @@ end
 # puts html_doc
 profile = {}
 
-puts root = html_doc.search('.bi.bj')
-work = root.search('#work')
-education = root.search('#education')
-living = root.search('#living')
-family = root.search('#family')
-basic_info = root.search('#basic-info')
-year_overviews = root.search('#year-overviews')
+# puts root = html_doc.search('.bi.bj')
+# work = root.search('#work')
+# education = root.search('#education')
+# living = root.search('#living')
+# family = root.search('#family')
+# basic_info = root.search('#basic-info')
+# year_overviews = root.search('#year-overviews')
 
 # html_doc.search('.de.df.dg.dh.di').each do |element|
 #   puts element
