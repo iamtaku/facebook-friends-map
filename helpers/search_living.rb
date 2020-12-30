@@ -5,9 +5,10 @@ def search_location(root_file)
     lived_in: nil,
     home: nil
   }
-  html_file = open(root_file).read
-  html_doc = Nokogiri::HTML(html_file)
-  root = html_doc.search('.bi.bj')
+  # puts root_file
+  # html_file = open(root_file).read
+  # html_doc = Nokogiri::HTML(html_file)
+  root = root_file.search('.bi.bj')
   root_living = root.search('#living')
   return location unless root_living.any? # return blank hash if empty
 
@@ -51,14 +52,14 @@ end
 
 # location = files.map { |file| p search_location(file) }
 # p location
-Dir.glob('db/profiles/*.html') do |file|
-  # puts "checking ... #{file}"
-  p file
-  p search_location(file)
+# Dir.glob('db/profiles/*.html') do |file|
+#   # puts "checking ... #{file}"
+#   p file
+#   p search_location(file)
 
-  # puts html_doc.search('.u.v.w').attribute('placeholder').content[0]
-  # if html_doc.search('.u.v.w').attribute('placeholder').nil? || html_doc.search('.u.v.w').attribute('placeholder').content[0] != 'S'
-  #   bad << Dir.pwd + '/' + file
-  # end
-  # puts file
-end
+#   # puts html_doc.search('.u.v.w').attribute('placeholder').content[0]
+#   # if html_doc.search('.u.v.w').attribute('placeholder').nil? || html_doc.search('.u.v.w').attribute('placeholder').content[0] != 'S'
+#   #   bad << Dir.pwd + '/' + file
+#   # end
+#   # puts file
+# end

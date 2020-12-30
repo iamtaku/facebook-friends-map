@@ -9,15 +9,9 @@ Dir.glob('db/profiles/*.html') do |file|
   html_file = open(file).read
   html_doc = Nokogiri::HTML(html_file)
   root = html_doc.search('.bi.bj')
-
+  puts html_doc.search('title').text
   profile = make_profile(root)
   puts profile
-
-  # puts html_doc.search('.u.v.w').attribute('placeholder').content[0]
-  # if html_doc.search('.u.v.w').attribute('placeholder').nil? || html_doc.search('.u.v.w').attribute('placeholder').content[0] != 'S'
-  #   bad << Dir.pwd + '/' + file
-  # end
-  # puts file
 end
 # puts 'enter a url to scrape...'
 # url = gets.chomp
@@ -25,7 +19,6 @@ end
 # html_file = open(url).read
 # html_doc = Nokogiri::HTML(html_file)
 # puts html_doc
-profile = {}
 
 # puts root = html_doc.search('.bi.bj')
 # work = root.search('#work')
