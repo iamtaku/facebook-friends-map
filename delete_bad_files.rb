@@ -13,7 +13,7 @@ Dir.glob('db/profiles/*.html') do |file|
 end
 
 if bad.empty?
-  puts "No bad files👼"
+  puts 'No bad files👼'
   exit
 end
 

@@ -25,10 +25,9 @@ def search_living(root_file)
   # puts cities
   living = {
     currentCity: cities[0],
-    homeTown: cities[1],
+    homeTown: cities[1]
   }
 end
 
-
-files.each {|file| search_living(file)}
+files.each { |file| search_living(file) }
 # search_living(root)

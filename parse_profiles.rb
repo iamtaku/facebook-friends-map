@@ -50,6 +50,3 @@ year_overviews = root.search('#year-overviews')
 #   puts element
 #   element.css('a').each { |item| puts item.content }
 # end
-
-
-
