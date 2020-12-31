@@ -3,14 +3,13 @@ require_relative 'helpers/search_living'
 require_relative 'helpers/make_profile'
 
 puts "Scanning #{Dir['db/profiles/*'].length} files \n ... \n"
+sleep 2
 
 Dir.glob('db/profiles/*.html') do |file|
-  # puts "checking ... #{file}"
   html_file = open(file).read
+  id = file.match(/(\d+)/)[0].to_i
   html_doc = Nokogiri::HTML(html_file)
-  # puts html_doc.search('title').text
-  # root = html_doc.search('.bi.bj')
-  profile = make_profile(html_doc)
+  profile = make_profile(id, html_doc)
   puts profile
 end
 
