@@ -5,9 +5,7 @@ def search_location(root_file)
     lived_in: nil,
     home: nil
   }
-  # puts root_file
-  # html_file = open(root_file).read
-  # html_doc = Nokogiri::HTML(html_file)
+
   root = root_file.search('.bi.bj')
   root_living = root.search('#living')
   return location unless root_living.any? # return blank hash if empty
@@ -20,7 +18,7 @@ def create_location(root_living)
   {
     lived_in: create_lived_in(city_table), # call create_lived_in function to generate array of places lived
     home: {
-      name: city_table.last.text
+      place: city_table.last.text
     }
   }
 end
@@ -34,7 +32,7 @@ def create_lived_in(city_table)
     next if item.text.chars.first(6).join == 'Moved ' # if item begins with 'Moved ', will skip
 
     lived_in << {
-      name: item.text,
+      place: item.text,
       year: get_year(city_table, index)
     }
   end
@@ -49,17 +47,3 @@ def get_year(city_table, index)
   end
   year
 end
-
-# location = files.map { |file| p search_location(file) }
-# p location
-# Dir.glob('db/profiles/*.html') do |file|
-#   # puts "checking ... #{file}"
-#   p file
-#   p search_location(file)
-
-#   # puts html_doc.search('.u.v.w').attribute('placeholder').content[0]
-#   # if html_doc.search('.u.v.w').attribute('placeholder').nil? || html_doc.search('.u.v.w').attribute('placeholder').content[0] != 'S'
-#   #   bad << Dir.pwd + '/' + file
-#   # end
-#   # puts file
-# end
